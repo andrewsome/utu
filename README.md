@@ -13,6 +13,7 @@
   - [x] Ability to display the processed data in the required format using a suitable
         frontend library/framework.
   - [x] Responsive design
+  - [x] Sortable table
   - [x] Testing
 
 ## preparation
