@@ -43,6 +43,14 @@
   padding: 0 5px;
 }
 
+.table th {
+  cursor: pointer;
+}
+
+.table th:hover {
+  color: red;
+}
+
 @media only screen and (max-width: 600px) {
   table,
   thead,

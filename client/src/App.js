@@ -7,12 +7,23 @@ class App extends Component {
     this.state = {
       month: '',
       day: '',
+      type: ''
     };
   }
 
   renderTableData() {
     const { data } = this.props;
-    return data.map((item, index) => {
+    const compare = ( a, b ) => {
+      if ( a[this.state.type] < b[this.state.type] ){
+        return -1;
+      }
+      if ( a[this.state.type] > b[this.state.type] ){
+        return 1;
+      }
+      return 0;
+    }
+
+    return data.sort(compare).map((item, index) => {
       const { coin, price, dailyDiff, weeklyDiff, monthlyDiff, dailyVolume, dailyMktCap } = item;
       return (
         <tr key={item + '_' + index}>
@@ -64,6 +75,12 @@ class App extends Component {
     const { month, day } = this.state;
     e.preventDefault();
     this.props.submitForm([month, day]);
+  }
+
+  sortByType = (type) => {
+    this.setState({
+      type,
+    })
   }
 
   render() {
@@ -119,13 +136,13 @@ class App extends Component {
           <table className='table'>
             <thead>
               <tr>
-                <th>Coin</th>
-                <th>Price</th>
-                <th>24h</th>
-                <th>7d</th>
-                <th>1m</th>
-                <th>24h Volume</th>
-                <th>Mkt Cap</th>
+                <th onClick={() => this.sortByType('coin')}>Coin</th>
+                <th onClick={() => this.sortByType('price')}>Price</th>
+                <th onClick={() => this.sortByType('dailyDiff')}>24h</th>
+                <th onClick={() => this.sortByType('weeklyDiff')}>7d</th>
+                <th onClick={() => this.sortByType('monthlyDiff')}>1m</th>
+                <th onClick={() => this.sortByType('dailyVolume')}>24h Volume</th>
+                <th onClick={() => this.sortByType('dailyMktCap')}>Mkt Cap</th>
               </tr>
             </thead>
             <tbody>
